@@ -1,0 +1,21 @@
+create database Rahul;
+
+use Rahul;
+
+create table agriculture(State_Name String,District_Name String,Crop_Year int,Season String,Crop String,Area float,Production int) row format delimited fields terminated by ',';
+
+load data local inpath '/home/hadoop/Documents/crop.csv' into table agriculture;
+
+select*from agriculture;
+
+create view crop_year as select Crop from agriculture where Crop_Year>2002;
+
+select*from crop_year;
+
+select count(*) from agriculture;
+
+select State_Name,lower(District_Name) from agriculture;
+
+select Crop,sqrt(Production) from agriculture;
+
+select max(Production) from agriculture;
