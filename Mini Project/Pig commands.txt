@@ -1,0 +1,27 @@
+pig -x local
+
+agriculture= load '/home/hadoop/Documents/miniproject/crop_production.csv' using PigStorage(',') as (State_Name:chararray,District_Name:chararray,Crop_Year:int,Season:chararray,Crop:chararray,Area:int,Production:int);
+
+describe agriculture;
+ 
+dump agriculture;
+ 
+statewise_group = group agriculture by State_Name;
+ 
+dump statewise_group;
+ 
+store statewise_group into '/home/hadoop/Documents/miniproject/statewise_output';
+ 
+filter_district = filter agriculture by District_Name == 'MADURAI';
+
+dump filter_district;
+
+store filter_district into '/home/hadoop/Documents/miniproject/filter_output;
+ 
+order_year = order agriculture by Crop_Year desc;
+
+dump order_year;
+
+foreach_crop = foreach agriculture generate Crop;
+ 
+dump foreach_crop;
